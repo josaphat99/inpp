@@ -1,6 +1,19 @@
 <section class="content">
     <header class="content__title">
-        <h1 class="animated"><b>Devenez candidat de l'INPP</b></h1>
+        <?php
+            if($this->session->type_compte == 'admin')
+            {
+        ?>
+                <h1 class="animated"><b>Inscrivez un nouveau candidat</b></h1>
+                <small>Rassurez-vous d'avoir tous les documents requis pour cette operation</small>
+        <?php
+            }else{
+        ?>
+            <h1 class="animated"><b>Devenez candidat de l'INPP</b></h1>
+        <?php
+            }
+        ?>
+        
     </header>
 
           
@@ -41,8 +54,8 @@
                         <div class="select">
                             <select class="form-control" name="genre" id="genre" required>
                                 <option value=""></option> 
-                                <option value="Male">M</option>   
-                                <option value="Female">F</option>   
+                                <option value="male">M</option>   
+                                <option value="female">F</option>   
                             </select>
                             <i class="form-group__bar"></i>
                         </div>            
@@ -94,17 +107,24 @@
                     </div>
                     <p><span id="doc_Span"></span></p> 
 
-                    <div class="form-group form-group--float">                        
-                        <input type="text" class="form-control" name="username" required>
-                        <label>Nom d'utilisateur</label>
-                        <i class="form-group__bar"></i>
-                    </div>
+                    <?php
+                        if(!$this->session->type_compte == 'admini'){
+                    ?>
+                             <div class="form-group form-group--float">                        
+                                <input type="text" class="form-control" name="username" required>
+                                <label>Nom d'utilisateur</label>
+                                <i class="form-group__bar"></i>
+                            </div>
 
-                    <div class="form-group form-group--float">                        
-                        <input type="password" class="form-control" name="password" required>
-                        <label>Mot de passe</label>
-                        <i class="form-group__bar"></i>
-                    </div> 
+                            <div class="form-group form-group--float">                        
+                                <input type="password" class="form-control" name="password" required>
+                                <label>Mot de passe</label>
+                                <i class="form-group__bar"></i>
+                            </div> 
+                    <?php
+                        }
+                    ?>
+                   
 
                     <div class="row">
                         <div class="col-md-12 text-center">

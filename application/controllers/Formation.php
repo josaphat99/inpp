@@ -55,6 +55,7 @@ class Formation extends CI_Controller
             $data = array(
                 'intitule' => $this->input->post('intitule'),
                 'duree' => $this->input->post('duree'),
+                'tarif' => $this->input->post('tarif'),
                 'branche_id' => $this->input->post('branche_id'),           
             );
             
@@ -98,5 +99,14 @@ class Formation extends CI_Controller
 
         $this->load->view('formation/candidate_course',$d);
         $this->load->view('layout/admin/js');
+    }
+
+    public function finish_course()
+    {
+        $formation_id = $this->input->get('formation_id');
+
+        $this->Crud->update_data('detail_formation',['id'=>$formation_id],['etat'=>'finished']);
+
+        redirect('formation/candidate_course');
     }
 }

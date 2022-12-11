@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <p id="error_message" class="text-red animated fadeInUp" hidden>Veuillez remplir tous le champs requis svp!!</p>
-                            <button class="btn btn-outline-primary btn-lg" style="border-radius:5px;" id="submit" type="submit">Ajouter</button>
+                            <button class="btn btn-primary btn-lg" style="border-radius:5px;" id="submit" type="submit">Ajouter</button>
                         </div>  
                     </div>             
                 </div>

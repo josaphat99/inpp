@@ -17,25 +17,33 @@
 
     <div class="header__logo hidden-sm-down">
         <h1>
-            <img class="img-fluid" width="50px" height="50px" src="<?=base_url('assets/demo/img/inpp.jpg')?>" alt="">
+            <img class="user__img img-fluid" width="50px" height="50px" src="<?=base_url('assets/demo/img/inpp.jpg')?>" alt="">
+            <span class="text-white"><b>INPP</b></span>
         </h1>
     </div>
 
     <ul class="top-nav">
-        <!--Theme switch-->     
+        <!--Theme switch-->   
+         
         <?php
+        $prof = ''; 
         if($this->session->id)
         {
+            if($this->session->genre == 'male')
+            {
+                $prof = "2.jpg";
+            }else{
+                $prof = "8.jpg";
+            }
         ?>       
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown"><img class="user__img" src=<?=base_url("assets/demo/img/profile-pics/2.jpg")?> alt=""></a>
+            <a href="#" data-toggle="dropdown"><img class="user__img" src=<?=base_url("assets/demo/img/profile-pics/".$prof)?> alt=""></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
                 <div class="listview listview--hover">
                     <div class="listview__header">
                     <img class="user__img" src=<?=base_url("assets/demo/img/profile-pics/2.jpg")?> alt=""><?=$this->session->name?>                 
                     </div>
-
-                    <a href=<?=site_url("profile")?> class="listview__item">
+                    <a href="#" class="listview__item">
                         <div class="listview__content">
                             <div class="listview__heading">
                             <i class="zmdi zmdi-account" style="font-size: 20px;"></i>&nbsp;&nbsp; Profile

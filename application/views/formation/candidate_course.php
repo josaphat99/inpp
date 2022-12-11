@@ -44,6 +44,12 @@
                         <th>Branche</th>
                         <th>Durée</th>
                         <th>Etat</th>
+                        <?php if($this->session->type_compte == 'candidat'){
+                            ?>
+                            <th style="width: 180px;">Actions</th>
+                        <?php
+                            }
+                        ?>
                     </tr>
                 </thead>                    
                 <tbody id="t-body">
@@ -58,7 +64,30 @@
                                 <td style="text-align: center;"><?=$f->intitule?></td>                  
                                 <td style="text-align: center;"><?=$f->branche?></td>
                                 <td style="text-align: center;"><?=$f->duree?></td>      
-                                <td style="text-align: center;"><?=$f->etat?></td>                                                  
+                                <td style="text-align: center;"><?=$f->etat?></td>    
+                                <?php
+                                    if($this->session->type_compte == 'candidat')
+                                    {
+                                    ?>
+                                        <td class="text-center">
+                                            <?php
+                                                if($f->etat == 'En cours')
+                                                {
+                                            ?>
+                                                    <a href="<?=site_url('formation/finish_course?formation_id='.$f->id)?>"
+                                                        <button class="btn btn-danger btn--raised">Cloturer</button>  
+                                                    </a>                                             
+                                            <?php
+                                                }else{
+                                            ?>
+                                                    <span><i class="zmdi zmdi-check zmdi-hc-fw"></i> </span>
+                                            <?php
+                                                }
+                                            ?>                                                                                                          
+                                        </td>
+                                    <?php
+                                    }
+                                    ?>                                               
                             </tr>
                     <?php
                         }

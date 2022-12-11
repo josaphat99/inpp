@@ -5,15 +5,28 @@
 </style>
 
 <?php
-    if(($this->session->financier_saved))
+    if(($this->session->candidat_saved))
     {
 ?>
         <script>
             Swal.fire({            
             icon: 'success',
-            title: 'Financier ajouté',
+            title: 'Candidat ajouté',
             showConfirmButton: false,
             timer: 3000
+            })
+        </script>
+<?php
+    }
+    if(($this->session->doc_upload_failed))
+    {
+?>
+        <script>
+            Swal.fire({            
+            icon: 'warning',
+            title: 'Les documents fournis n\'ont pas été enregistrés!!',
+            showConfirmButton: true,
+            timer: 30000
             })
         </script>
 <?php
@@ -24,7 +37,7 @@
         <script>
             Swal.fire({            
             icon: 'success',
-            title: 'Financier Supprimé',
+            title: 'Candidat Supprimé',
             showConfirmButton: false,
             timer: 3000
             })
@@ -35,7 +48,7 @@
 
 <section class="content">
     <header class="content__title">
-        <h1 class="animated"><b>Financier</b></h1>
+        <h1 class="animated"><b>Candidats</b></h1>
     </header>
 
     <div class="card animated fadeIn">
@@ -43,10 +56,10 @@
         <header class="content__title">
             <div class="row">
                 <div class="col-md-6">
-                    <p><b>Liste des financiers</b></p>
+                    <p><b>Liste des candidats inscripts aux formations</b></p>
                 </div>
                 <div class="col-md-3 offset-md-3">
-                    <a href="<?=site_url('compte/new_financier')?>" class="btn btn-secondary"><i class="zmdi zmdi-plus zmdi-hc-fw"></i> Nouveau financier</a>
+                    <a href="<?=site_url('compte/new_candidate')?>" class="btn btn-secondary"><i class="zmdi zmdi-plus zmdi-hc-fw"></i> Nouveau Candidat</a>
                 </div>
             </div>
         </header>
@@ -55,7 +68,7 @@
                     <thead class="thead-default alert alert-info">
                         <tr class="text-white">
                             <th style="width: 20px;">No</th>
-                            <th>Matricule</th>    
+                            <th>Date d'inscription</th>    
                             <th>Nom complet</th> 
                             <th>Email</th>     
                             <th>Tel</th>                      
@@ -71,14 +84,14 @@
                             { $num++?> 
                                 <tr>
                                     <td style="text-align: center;width: 20px;"><?=$num?></td>
-                                    <td style="text-align: center;"><?=$c->matricule?></td>  
+                                    <td style="text-align: center;"><?=$c->created_at?></td>  
                                     <td style="text-align: center;"><?=$c->nom_complet?></td>   
                                     <td style="text-align: center;"><?=$c->email?></td>          
                                     <td style="text-align: center;"><?=$c->phone?></td>         
                                     <td style="text-align: center;"><?=$c->adresse?></td>
                                     <td style="text-align: center;"><?=$c->genre == 'male'? 'Homme':'Femme'?></td>
                                     <td>
-                                        <!-- <button class="btn btn-success btn--raised"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></button> -->
+                                        <a href="<?=site_url('compte/detail_candidat?candidat_compte_id='.$c->id.'&utilisateur_id='.$c->utilisateur_id)?>"><button class="btn btn-outline-success btn--raised"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></button></a>
                                         <form id="form-delete" onclick='javascript:confirmation($(this));return false;'action="<?=site_url("compte/delete_compte")?>" method="post" style="float:right;">                                
                                             <input type="hidden" value="<?=$c->id?>" name="compte_id">
                                             <button id="delete" class="btn btn-outline-danger btn--raised" title="Supprimer">
@@ -109,7 +122,7 @@
     function confirmation(anchor)
     {
         Swal.fire({
-        title: 'Voulez-vous vraiment supprimer ce financier?',
+        title: 'Voulez-vous vraiment supprimer ce Candidat?',
         text: "Vous ne serez plus capable de le recuperer!",
         icon: 'warning',
         showCancelButton: true,
@@ -121,7 +134,7 @@
             if (result.value) {
                 Swal.fire(
                 'Supprimé!',
-                'Financier supprimé.',
+                'Candidat supprimé.',
                 'success'
                 )
                 anchor.submit();

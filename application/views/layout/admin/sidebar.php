@@ -4,7 +4,10 @@
             <div class="user__info" data-toggle="dropdown">
                 <img class="user__img" src="<?=base_url('assets/demo/img/inpp.jpg')?>" alt="">
                 <div>
-                    <div class="user__name"><h4>I.N.P.P</h4></div>
+                    <div class="user__name">
+                        <h6><?=ucfirst($this->session->type_compte)?></h6>
+                        <small><?=$this->session->nomcomplet?></small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,8 +26,9 @@
             <?php
                 }elseif($this->session->type_compte == 'admin'){
             ?>
-                <li><a href="<?=site_url('candidat/view_candidat')?>"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Candidats</a></li> 
+                <li><a href="<?=site_url('compte/view_candidat')?>"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Candidats</a></li> 
                 <li><a href="<?=site_url('compte/view_financier')?>"><i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Financier</a></li>
+                <li><a href="<?=site_url('formation/index')?>"><i class="zmdi zmdi-collection-bookmark zmdi-hc-fw"></i> Formations</a></li>
             <?php
                 }else{
             ?>

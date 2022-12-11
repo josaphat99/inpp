@@ -24,7 +24,7 @@
             <header class="content__title">
                 <h1><b>Paiement par carte de Credit <span><i class="zmdi zmdi-card zmdi-hc-fw"></i></span></b></h1>
             </header>            
-            <form class="row" action="<?=site_url('payment/new_paiement')?>" method="post">
+            <form class="row" action="<?=site_url('payment/new_paiement')?>" method="post" id="form">
                 <div class="col-md-6 offset-md-3">                     
 
                     <div class="form-group form-group--float">
@@ -50,7 +50,7 @@
                     <div class="row" style="margin-top:-30px">
                         <div class="col-md-6">
                             <div class="form-group form-group--float">                        
-                                <input type="text" class="form-control" name="expiration" placeholder="00/00" required>
+                                <input type="text" class="form-control" name="expiration" id="expiration" placeholder="00/00" required>
                                 <label></label>
                                 <i class="form-group__bar"></i>
                             </div>  
@@ -58,7 +58,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group form-group--float">                        
-                                <input type="text" class="form-control" name="cvv" placeholder="CVV" required>
+                                <input type="text" class="form-control" name="cvv" id="cvv" placeholder="CVV" required>
                                 <label></label>
                                 <i class="form-group__bar"></i>
                             </div>  
@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <p id="error_connexion" class="text-red animated fadeInUp" hidden>Veuillez remplir tous les champs svp!</p>
-                            <button class="btn btn-outline-primary btn-lg" style="border-radius:5px;" id="submit" type="submit">Valider</button>
+                            <button class="btn btn-outline-primary btn-lg" style="border-radius:5px;" id="subtn" type="submit">Valider</button>
                         </div>  
                     </div>
                 </div>
@@ -77,3 +77,43 @@
         </div>
     </div>
 </section>
+
+<script src=<?=base_url('assets/vendors/jquery/jquery.min.js')?>></script> 
+
+<script>
+    $(function()
+    {
+        $("#subtn").click(function(e)
+        {
+            e.preventDefault();
+
+            if($("#montant").val() == '' 
+                ||$("#card").val() == '' 
+                ||$("#expiration").val() == '' 
+                ||$("#cvv").val() == '' )
+            {
+                $("#error_connexion").removeAttr('hidden');
+            }else{
+                if($("#montant").val() < <?=$formation->tarif?>)
+                {
+                    Swal.fire({            
+                        icon: 'warning',
+                        title: 'Le montant saisi est inferieur au tarif de la formation!!',
+                        showConfirmButton: true,
+                        timer: 30000
+                    })
+                }else if($("#montant").val() > <?=$formation->tarif?>){
+                    Swal.fire({            
+                        icon: 'warning',
+                        title: 'Le montant saisi est superieur au tarif de la formation!!',
+                        showConfirmButton: true,
+                        timer: 30000
+                    })
+                }else{
+                    console.log($("#form"));
+                    $("#form").submit();
+                }
+            }
+        })
+    })
+</script>

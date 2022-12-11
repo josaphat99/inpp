@@ -5,6 +5,19 @@
 </style>
 
 <?php
+    if(($this->session->candidate_saved))
+    {
+?>
+        <script>
+            Swal.fire({            
+            icon: 'success',
+            title: 'Candidat Enregistré!',
+            showConfirmButton: false,
+            timer: 3000
+            })
+        </script>
+<?php
+    }
     if(($this->session->doc_upload_failed))
     {
 ?>
@@ -24,7 +37,20 @@
         <script>
             Swal.fire({            
             icon: 'success',
-            title: 'Transfusion Supprimé',
+            title: 'Formation Ajoutée',
+            showConfirmButton: false,
+            timer: 3000
+            })
+        </script>
+<?php
+    }
+    if(($this->session->formation_saved))
+    {
+?>
+        <script>
+            Swal.fire({            
+            icon: 'success',
+            title: 'Formation Ajoutée',
             showConfirmButton: false,
             timer: 3000
             })
@@ -46,10 +72,10 @@
                     <p><b>Voici la liste de toutes les formations disponibles pour tout type de candidats</b></p>
                 </div>
                 <?php
-                    if($this->session->type == 'admin')
+                    if($this->session->type_compte == 'admin')
                     {
                 ?>
-                    <div class="col-md-3 offset-md-3">
+                    <div class="col-md-3 offset-md-9">
                         <a href="<?=site_url('formation/new_formation')?>" class="btn btn-secondary"><i class="zmdi zmdi-plus zmdi-hc-fw"></i> Nouvelle Formation</a>
                     </div>
                 <?php
@@ -67,7 +93,7 @@
                             <th>Durée</th>
                            <th>Tarif</th>
                             <!--<th>Quantite</th> -->
-                            <?php if($this->session->connected){
+                            <?php if($this->session->type_compte == 'candidat'){
                                 ?>
                                 <th style="width: 180px;">Actions</th>
                             <?php
@@ -89,7 +115,7 @@
                                     <td style="text-align: center;"><?=$f->duree?></td>
                                     <td style="text-align: center;"><?=$f->tarif?> $</td>
                                     <?php
-                                    if($this->session->connected)
+                                    if($this->session->type_compte == 'candidat')
                                     {
                                     ?>
                                         <td class="text-center">

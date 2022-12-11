@@ -56,13 +56,13 @@ class Crud extends CI_Model
 
 	//join compte and utilisateur
 
-	public function join_compte_user()
+	public function join_compte_user($type_compte)
 	{
 		$this->db->select("*, compte.id as id")
 				 ->from('compte')
-				 ->join('utilisateur','compte.utilisateur_id = utilisateur.id')
+				 ->join('utilisateur','compte.utilisateur_id = utilisateur.id',)
 				 ->order_by('compte.id','DESC')
-				 ->where(['type_compte !='=> 'admin','type_compte'=>'finance']);
+				 ->where(['type_compte !='=> 'admin','type_compte'=>$type_compte]);
 		
 		return $this->db->get()->result();
 	}
